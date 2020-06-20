@@ -7,8 +7,8 @@ class Player {
         this.tag = user.tag;
         this.avatar = user.avatarURL();
         try {
-            // this.dm_channel = user.dm_channel || user.createDM();
-            this.dm_channel = (user.dm_channel !== undefined) ? user.dm_channel : (async () => await user.createDM())();
+            this.dm_channel = user.dm_channel || (async () => await user.createDM())();
+            // this.dm_channel = (user.dm_channel !== undefined) ? user.dm_channel : (async () => await user.createDM())();
             console.debug(this.dm_channel);
             this.dm_channel.send('TEST MESSAGE');
         } catch (err) {

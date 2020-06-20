@@ -100,7 +100,7 @@ class MessageManager {
         const register_max = game.profile.max_players;
         const timeout = {
             'REGISTRATION': 300000,             // 5 Minutes
-            'MATCH_END': 300000,                // 5 Minutes
+            'MATCH_END': 600000,                // 10 Minutes
             'VOTE': vote_time,                  // Variable (Default = 30 seconds)
             'MAFIA': 300000,                    // 5 Minutes
             'CHANGE_HOST': 300000               // 5 Minutes
