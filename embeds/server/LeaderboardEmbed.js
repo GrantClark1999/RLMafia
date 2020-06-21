@@ -1,4 +1,4 @@
-const BaseEmbed = require('./BaseEmbed');
+const BaseEmbed = require('../BaseEmbed');
 const MessageManager = require('../app/MessageManager');
 
 module.exports = (game) => {

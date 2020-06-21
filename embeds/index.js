@@ -1,17 +1,7 @@
-const RegistrationEmbed = require('./RegistrationEmbed');
-const GameboardEmbed = require('./GameboardEmbed');
-const MatchEndEmbed = require('./MatchEndEmbed');
-const VoteEmbed = require('./VoteEmbed');
-const AnnounceMafiaEmbed = require('./AnnounceMafiaEmbed');
-const LeaderboardEmbed = require('./LeaderboardEmbed');
-const ChangeHostEmbed = require('./ChangeHostEmbed');
+'use strict';
 
-module.exports = {
-    'REGISTRATION': RegistrationEmbed,
-    'GAMEBOARD': GameboardEmbed,
-    'MATCH_END': MatchEndEmbed,
-    'VOTE': VoteEmbed,
-    'MAFIA': AnnounceMafiaEmbed,
-    'LEADERBOARD': LeaderboardEmbed,
-    'CHANGE_HOST': ChangeHostEmbed
-}
+const client = require('./client');
+const server = require('./server');
+
+module.exports.ClientEmbeds = client;
+module.exports.ServerEmbeds = server;

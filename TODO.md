@@ -11,7 +11,8 @@
 - [X] Handle end game -> remove game from players
 - [ ] Add `m!help` command + embed
 - [ ] Re-factor objects into MongoDB
-- [X] MafiaCollector `.on('end')` needs to be added.
+- [X] MafiaCollector `.on('end')` needs to be added
+- [ ] Test Leaderboard Formatting
 
 
 ## MEDIUM PRIORITY
@@ -28,8 +29,9 @@
 - [ ] Add `m!end` for hosts to end the game manually at any point
 - [ ] Make "shuffle" for game-start represent shuffling teams ONLY
 - [ ] Make "rewind" for game-start represent going back to registration ONLY
-- [ ] Refactor Emojis into separate file and change all uses to references.
-- [ ] Refactor Collector times and max parameters to a guild or user profile.
+- [ ] Refactor Emojis into separate file and change all uses to references
+- [ ] Refactor Collector times and max parameters to a guild or user profile
+- [ ] Add `'use-strict';` to all files
 
 
 ## LOW PRIORITY
@@ -42,7 +44,7 @@
   - [ ] Also include assignments for reactions
 - [ ] Allow host to host a game without participating (as spectator)
   - [ ] Allow a spectator host to host multiple games
-- [ ] Give some indication for what points were awarded in the match.
+- [ ] Give some indication for what points were awarded in the match
 
 
 ## ALREADY COMPLETED (Prior to Version Control on GitHub)
@@ -51,7 +53,7 @@
 - [X] Updated bot activity
 - [X] Added `m!kick` functionality -- untested
 - [X] Added `ready`, `guildCreate`, `guildDelete`, and `message` handlers for bot / client
-- [X] Added a "Game" class to represent individual games.
+- [X] Added a "Game" class to represent individual games
 - [X] Added "Player" class to represent an active player in a "Game"
 - [X] Added many console.debug statements to improve logging
 - [X] Added full-game logic

@@ -2,7 +2,7 @@
 const Discord = require('discord.js');
 const Game = require('./Game');
 const PackageInfo = require('../package.json');
-const Embeds = require('../embeds');
+const { ServerEmbeds, ClientEmbeds } = require('../embeds');
 const Filters = require('../filters');
 const Collectors = require('../collectors');
 
@@ -14,7 +14,7 @@ class MessageManager {
      * @returns {Promise<Discord.MessageEmbed>}
      */
     static async sendServerMessage(game, type) {
-        const embed = Embeds[type](game)
+        const embed = ServerEmbeds[type](game)
 
         if (type === 'CHANGE_HOST' || type === 'LEADERBOARD') {
             game.last_message = await game.channel.send(embed);
@@ -74,35 +74,21 @@ class MessageManager {
      * @returns {Promise<[...string]>}
      */
     static async addReactions(game, type) {
-        let emojis = [];
-
-        // Find appropriate emojis for each type of message.
-        switch (type) {
-            case 'REGISTRATION':
-                emojis = ['✅', '❌', '▶'];
-                break;
-            case 'GAMEBOARD':
-                emojis = ['▶', '🔀'];
-                break;
-            case 'MATCH_END':
-                emojis = ['🔵', '🟠'];
-                break;
-            case 'VOTE':
-                emojis = num_emojis.slice(0, game.players.length);
-                break;
-            case 'MAFIA':
-                emojis = ['🔁', '⏹'];
-                break;
-            case 'CHANGE_HOST':
-                emojis = num_emojis.slice(0, game.players.length);
-                break;
-        }
+        let emojis = {
+            'REGISTRATION': ['✅', '❌', '▶'],
+            'GAMEBOARD': ['▶', '🔀'],
+            'MATCH_END': ['🔵', '🟠'],
+            'VOTE': num_emojis.slice(0, game.players.length),
+            'MAFIA': ['🔁', '⏹'],
+            'CHANGE_HOST': num_emojis.slice(0, game.players.length)
+        };
 
         // Add each appropriate emoji to the last game message (IN ORDER)
-        emojis.forEach(async (emoji) => {
+        emojis[type].forEach(async (emoji) => {
             try {
-                game.last_message.react(emoji);
+                await game.last_message.react(emoji);
             } catch (err) {
+                console.error(`Failed to add ${emoji} reaction to ${type} message.`);
                 console.error(err);
             }
         });
@@ -151,21 +137,11 @@ class MessageManager {
     }
 
     static sendDMs(game) {
-        const embed = new Discord.MessageEmbed()
-            .setAuthor(`${game.host.username}'s ⚽ Rocket League Mafia Game ⚽`)
-            .setFooter(`Powered by Rocket League Mafia Bot v${PackageInfo.version}`, game.host.avatar);
-        const villager_embed = new Discord.MessageEmbed(embed)
-            .setColor('#008000')
-            .setTitle('Villager');
-        const mafia_embed = new Discord.MessageEmbed(embed)
-            .setColor('#800000')
-            .setTitle('Mafia');
-
         game.villagers.forEach(player => {
-            player.dm_channel.send(villager_embed);
+            player.dm_channel.send(ClientEmbeds.VillagerEmbed(game));
         });
         game.mafia.forEach(player => {
-            player.dm_channel.send(mafia_embed);
+            player.dm_channel.send(ClientEmbeds.MafiaEmbed(game));
         });
     }
 }

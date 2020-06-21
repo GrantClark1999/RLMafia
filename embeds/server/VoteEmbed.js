@@ -1,4 +1,4 @@
-const BaseEmbed = require('./BaseEmbed');
+const BaseEmbed = require('../BaseEmbed');
 
 module.exports = (game) => {
     let vote_players = '';
