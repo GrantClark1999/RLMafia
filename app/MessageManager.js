@@ -331,7 +331,7 @@ class MessageManager {
                     return (num_emojis.includes(reaction.emoji.name) && user.tag === game.host.tag);
                 }
         }
-        return filter;
+        return filter; 
     }
 
     static sortPlayers(game) {

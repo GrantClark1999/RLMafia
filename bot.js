@@ -37,7 +37,7 @@ client.on("message", async message => {
     switch(command) {
         case 'new':
             if (!games.has(user)) {
-                new Game(message);
+                Game.create(message);
             } else {
                 throw new Error('GAME_ALREADY_EXISTS', user);
             }

@@ -10,11 +10,11 @@
 - [ ] Add reaction hinting to Embeds
 - [ ] Handle end game -> remove game from players
 - [ ] Add `m!help` command + embed
+- [ ] Re-factor objects into MongoDB
 
 
 ## MEDIUM PRIORITY
 
-- [ ] Re-factor objects into MongoDB
 - [ ] Re-factor MessageManager embeds into separate json file(s)
 - [ ] Edit Embed UI to be more "eye-pleasing"
 - [ ] Private Games

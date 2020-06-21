@@ -6,7 +6,7 @@ const kCode = Symbol('code');
 const messages = new Map();
 
 function makeRLMafiaError(Base) {
-    return class RLMafiaError extends Base {
+    return class RLMError extends Base {
         constructor(key, ...args) {
             super(message(key, args));
             this[kCode] = key;

@@ -5,22 +5,14 @@ const MessageManager = require('./MessageManager');
 const PackageInfo = require('../package.json');
 const Player = require('./Player');
 const Bot = require('../bot');
+const { Error } = require('../errors');
 
 const num_emojis = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣'];
 
 class Game {
     constructor(message) {
         this.players = [];
-        try {
-            this.host = new Player(message.author, this);
-        } catch (err) {
-            console.error(err.message);
-            message.channel.send(err.message);
-            message.delete();
-            this.end();
-            return;
-        }
-        this.players.push(this.host);
+
         this.mafia = [];
         this.villagers = [];
 
@@ -36,11 +28,30 @@ class Game {
 
         this.channel = message.channel;
         this.last_message = message;
-        this.host.game = this;
 
-        games.set(this.host.tag, this);
+        games.set(message.author.tag, this);
+    }
 
-        this.register();
+    async initialize() {
+        try {
+            this.host = await Player.create(this.last_message.author, this);
+            this.host.game = this;
+            this.players.push(this.host);
+            this.register();
+        } catch (err) {
+            console.error(err.message);
+            if (err instanceof Error)
+                this.last_message.channel.send(err.message);
+            this.last_message.delete();
+            this.end();
+            return;
+        }
+    }
+
+    static async create(message) {
+        const o = new Game(message);
+        await o.initialize();
+        return o;
     }
 
     register() {
@@ -94,17 +105,16 @@ class Game {
             throw new Error('GAME_IS_FULL');
         }
         if (this.find(user) === null) {
-            try {
-                let new_player = new Player(user, this);
-                new_player.dm_channel.send('Test Message --- REMOVE LATER');
+            Player.create(user, this).then(new_player => {
                 this.players.push(new_player);
                 return true;
-            } catch (err) {
+            }).catch(err => {
                 console.error(err.message);
-                this.channel.send(err.message);
+                if (err instanceof Error)
+                    this.channel.send(err.message);
                 this.removeReactions(user, this.last_message);
                 return false;
-            }
+            });
         }
     }
 
