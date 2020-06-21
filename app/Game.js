@@ -13,8 +13,8 @@ class Game {
     constructor(message) {
         this.players = [];
 
-        this.mafia = [];
         this.villagers = [];
+        this.mafia = [];
 
         this.profile = {
             max_players: 8,
@@ -28,8 +28,6 @@ class Game {
 
         this.channel = message.channel;
         this.last_message = message;
-
-        games.set(message.author.tag, this);
     }
 
     async initialize() {
@@ -95,8 +93,9 @@ class Game {
         if (this.match_num > 0)
             this.showLeaderboard();
         this.players.forEach(player => {
-            games.delete(player);
+            games.delete(player.tag);
         });
+        this.last_message.delete();
     }
 
     join(user) {
@@ -130,7 +129,9 @@ class Game {
                             .then(() => MessageManager.collect(this, 'CHANGE_HOST'));
                     } else {
                         // Don't remove player from this.players, else single player will not be showed on leaderboard.
+                        console.debug('before end')
                         this.end();
+                        console.debug('after end')
                     }
                 } else {
                     this.players.splice(index, 1);
@@ -168,6 +169,7 @@ class Game {
             let index = Math.floor(Math.random() * this.villagers.length);
             let mafia_player = this.villagers[index];
             this.mafia.push(mafia_player);
+            this.villagers.splice(index, 1);
         }
     }
 

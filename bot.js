@@ -6,6 +6,7 @@ const Game = require('./app/Game');
 const { Error } = require('./errors');
 
 global.games = new Map();
+global.num_emojis = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣'];
 
 function updateActivity() {
     client.user.setActivity(`${config.prefix}help | Serving ${client.guilds.cache.size} servers!`);
@@ -37,7 +38,9 @@ client.on("message", async message => {
     switch(command) {
         case 'new':
             if (!games.has(user)) {
-                Game.create(message);
+                Game.create(message).then(game => {
+                    games.set(user, game);
+                });
             } else {
                 throw new Error('GAME_ALREADY_EXISTS', user);
             }

@@ -5,12 +5,12 @@
 const kCode = Symbol('code');
 const messages = new Map();
 
-function makeRLMafiaError(Base) {
+function makeRLMError(Base) {
     return class RLMError extends Base {
         constructor(key, ...args) {
             super(message(key, args));
             this[kCode] = key;
-            if (Error.captureStackTrace) Error.captureStackTrace(this, RLMafiaError);
+            if (Error.captureStackTrace) Error.captureStackTrace(this, RLMError);
         }
         get name() {
             return `${super.name} [${this[kCode]}]`;
@@ -38,7 +38,7 @@ function register(sym, val) {
 
 module.exports = {
     register,
-    Error: makeRLMafiaError(Error),
-    TypeError: makeRLMafiaError(TypeError),
-    RangeError: makeRLMafiaError(RangeError)
+    Error: makeRLMError(Error),
+    TypeError: makeRLMError(TypeError),
+    RangeError: makeRLMError(RangeError)
 };

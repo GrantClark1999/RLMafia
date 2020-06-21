@@ -3,12 +3,12 @@
 
 ## HIGH PRIORITY
 
-- [ ] DM Villager and Mafia Messages
-  - [ ] Handle DMs NOT Open
+- [X] DM Villager and Mafia Messages
+  - [X] Handle DMs NOT Open
 - [ ] Edit Registration Embed with Registered Players
 - [ ] Test `m!kick <player>` feature
 - [ ] Add reaction hinting to Embeds
-- [ ] Handle end game -> remove game from players
+- [X] Handle end game -> remove game from players
 - [ ] Add `m!help` command + embed
 - [ ] Re-factor objects into MongoDB
 
@@ -24,8 +24,10 @@
   - [ ] After game end, post results to the main Mafia channel
 - [ ] Handle Errors thrown by outputting something to console and discord game
 - [ ] Add `m!leave` as override to leave all games associated with such player
+- [ ] Add `m!end` for hosts to end the game manually at any point
 - [ ] Make "shuffle" for game-start represent shuffling teams ONLY
 - [ ] Make "rewind" for game-start represent going back to registration ONLY
+- [ ] Refactor Emojis into separate file and change all uses to references.
 
 
 ## LOW PRIORITY
@@ -41,7 +43,7 @@
 - [ ] Give some indication for what points were awarded in the match.
 
 
-## ALREADY COMPLETED
+## ALREADY COMPLETED (Prior to Version Control on GitHub)
 
 - [X] Added `m!new` command for creating new Games
 - [X] Updated bot activity
