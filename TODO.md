@@ -11,6 +11,7 @@
 - [X] Handle end game -> remove game from players
 - [ ] Add `m!help` command + embed
 - [ ] Re-factor objects into MongoDB
+- [X] MafiaCollector `.on('end')` needs to be added.
 
 
 ## MEDIUM PRIORITY
@@ -28,6 +29,7 @@
 - [ ] Make "shuffle" for game-start represent shuffling teams ONLY
 - [ ] Make "rewind" for game-start represent going back to registration ONLY
 - [ ] Refactor Emojis into separate file and change all uses to references.
+- [ ] Refactor Collector times and max parameters to a guild or user profile.
 
 
 ## LOW PRIORITY

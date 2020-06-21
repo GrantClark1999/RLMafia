@@ -4,6 +4,7 @@ const Game = require('./Game');
 const PackageInfo = require('../package.json');
 const Embeds = require('../embeds');
 const Filters = require('../filters');
+const Collectors = require('../collectors');
 
 class MessageManager {
     /**
@@ -31,7 +32,6 @@ class MessageManager {
      * @returns {Promise<int>} Number of collected responses before quitting.
      */
     static async collect(game, type) {
-        const filter = Filters[type](game);
         const vote_time = game.profile.vote_time * 1000;
         const register_max = game.profile.max_players;
         const timeout = {
@@ -48,103 +48,9 @@ class MessageManager {
             'MAFIA': 1,                         // 1 -> Host Player
             'CHANGE_HOST': 1                    // 1 -> Host Player
         };
+        const filter = Filters[type](game);
         const collector = game.last_message.createReactionCollector(filter, {time: timeout[type], max: max[type]});
-        switch (type) {
-            case 'REGISTRATION':
-                collector.on('collect', async (reaction, user) => {
-                    if (reaction.emoji.name === '▶') {
-                        game.start();
-                        return true;
-                    } else if (reaction.emoji.name === '✅') {
-                        game.join(user);
-                    } else if (reaction.emoji.name === '❌') {
-                        game.leave(user);
-                    }
-                });
-                collector.on('end', (collected, reason) => {
-                    if (game.status.toUpperCase() === type && reason !== 'messageDelete') {
-                        console.debug(`Ending game after ${collected.size} collections from ${type} due to ${reason}`);
-                        game.end();
-                    }
-                    return false;
-                });
-                break;
-            case 'GAMEBOARD':
-                collector.on('collect', (reaction, user) => {
-                    if (reaction.emoji.name === '▶') 
-                        game.matchEnd();
-                    else if (reaction.emoji.name === '🔀')
-                        game.register();
-                    else 
-                        return false;
-                    return true;
-                });
-                collector.on('end', (collected, reason) => {
-                    let has_collected = (collected.size !== 0);
-                    if (!has_collected && reason !== 'messageDelete') {
-                        console.debug(`Ending game after ${collected.size} collections from ${type} due to ${reason}`);
-                        game.end();
-                    }
-                    return has_collected;
-                });
-                break;
-            case 'MATCH_END':
-                collector.on('collect', (reaction, user) => {
-                    if (reaction.emoji.name === '🔵') {
-                        game.match_winner = 0;
-                    } else {
-                        game.match_winner = 1;
-                    }
-                    game.vote();
-                    return true;
-                });
-                collector.on('end', (collected, reason) => {
-                    let has_collected = (collected.size !== 0);
-                    if (!has_collected && reason !== 'messageDelete') {
-                        console.debug(`Ending game after ${collected.size} collections from ${type} due to ${reason}`);
-                        game.end();
-                    }
-                    return has_collected;
-                });
-                break;
-            case 'VOTE':
-                collector.on('collect', (reaction, user) => {
-                    let index = num_emojis.indexOf(reaction.emoji.name);
-                    game.players[index].votes_against++;
-                });
-                collector.on('end', () => {
-                    game.assignPoints();
-                    game.announceMafia();
-                    return true;
-                });
-                break;
-            case 'MAFIA':
-                collector.on('collect', (reaction, user) => {
-                    if (reaction.emoji.name === '🔁') {
-                        game.match_num--;
-                        game.showGameboard();
-                    } else if (reaction.emoji.name === '⏹') {
-                        game.end();
-                    } else {
-                        return false;
-                    }
-                    return true;
-                });
-                break;
-            case 'CHANGE_HOST':
-                collector.on('collect', (reaction, user) => {
-                    let index = num_emojis.indexOf(reaction.emoji.name);
-                    game.host = game.players[index];
-                });
-                collector.on('end', (collected, reason) => {
-                    let has_collected = (collected.size !== 0);
-                    if (!has_collected && reason !== 'messageDelete') {
-                        console.debug(`Ending game after ${collected.size} collections from ${type} due to ${reason}`);
-                        game.end();
-                    }
-                    return has_collected;
-                });
-        }
+        Collectors[type](collector, game);
     }
 
     /**
