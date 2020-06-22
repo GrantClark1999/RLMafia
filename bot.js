@@ -4,6 +4,7 @@ const client = new Discord.Client();
 const config = require('./config.json');
 const Game = require('./app/Game');
 const { Error } = require('./errors');
+const { ServerEmbeds } = require('./embeds');
 
 global.games = new Map();
 global.num_emojis = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣'];
@@ -36,6 +37,10 @@ client.on("message", async message => {
     let user = message.author.tag;
 
     switch(command) {
+        case 'help':
+            message.channel.send(ServerEmbeds['HELP']);
+            message.delete();
+            break;
         case 'new':
             if (!games.has(user)) {
                 Game.create(message).then(game => {
@@ -57,6 +62,7 @@ client.on("message", async message => {
             } else {
                 throw new Error('GAME_DOES_NOT_EXIST', user);
             }
+            break;
     }
 });
 

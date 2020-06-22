@@ -3,22 +3,15 @@
 
 ## HIGH PRIORITY
 
-- [X] DM Villager and Mafia Messages
-  - [X] Handle DMs NOT Open
-- [X] Edit Registration Embed with Registered Players
-- [ ] Test `m!kick <player>` feature
-- [X] Add reaction hinting to Embeds
-- [X] Handle end game -> remove game from players
-- [ ] Add `m!help` command + embed
 - [ ] Re-factor objects into MongoDB
-- [X] MafiaCollector `.on('end')` needs to be added
+- [ ] `m!kick`
+  - [ ] Test `m!kick <player>` feature **OR**
+  - [ ] Make `m!kick` a reaction-based process
 - [ ] Test Leaderboard Sorting
 
 
 ## MEDIUM PRIORITY
 
-- [X] Re-factor MessageManager embeds into separate file(s)
-- [X] Edit Embed UI to be more "eye-pleasing"
 - [ ] Private Games
   - [ ] Create temporary channel
   - [ ] Ask Host for Users to allow / invite
@@ -27,13 +20,10 @@
 - [ ] Handle Errors thrown by outputting something to console and discord game
 - [ ] Add `m!leave` as override to leave all games associated with such player
 - [ ] Add `m!end` for hosts to end the game manually at any point
-- [X] Make "shuffle" for game-start represent shuffling teams ONLY
-- [X] Make "rewind" for game-start represent going back to registration ONLY
 - [ ] Refactor Emojis into separate file and change all uses to references
   - [ ] Replace business-level emojis with escaped unicode
 - [ ] Refactor Collector times and max parameters to a guild or user profile
 - [ ] Add `'use-strict';` to all files
-- [X] Use 🥇, 🥈, and 🥉 for end leaderboard
 - [ ] Find better way to display number of games played in Leaderboard
 
 
@@ -52,7 +42,22 @@
 - [ ] Add ability to re-assign mafia
 
 
-## ALREADY COMPLETED (Prior to Version Control on GitHub)
+## COMPLETED
+- [X] DM Villager and Mafia Messages
+  - [X] Handle DMs NOT Open
+- [X] Edit Registration Embed with Registered Players
+- [X] Add reaction hinting to Embeds
+- [X] Handle end game -> remove game from players
+- [X] MafiaCollector `.on('end')` needs to be added
+- [X] Re-factor MessageManager embeds into separate file(s)
+- [X] Edit Embed UI to be more "eye-pleasing"
+- [X] Make "shuffle" for game-start represent shuffling teams ONLY
+- [X] Make "rewind" for game-start represent going back to registration ONLY
+- [X] Use 🥇, 🥈, and 🥉 for end leaderboard
+- [X] Add `m!help` command + embed
+
+
+## COMPLETED (prior to version-control via Github)
 
 - [X] Added `m!new` command for creating new Games
 - [X] Updated bot activity

@@ -1,3 +1,5 @@
+'use strict';
+
 const { DiscordAPIError } = require("discord.js")
 
 const Discord = require('../node_modules/discord.js');
