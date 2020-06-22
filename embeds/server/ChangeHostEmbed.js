@@ -1,8 +1,8 @@
 const BaseEmbed = require('../BaseEmbed');
-const MessageManager = require('../app/MessageManager');
+const Format = require('../Format');
 
 module.exports = (game) => {
-    formatted = MessageManager.formatPlayers(game, 'CHANGE_HOST');
+    formatted = Format.formatPlayers(game, 'CHANGE_HOST');
     return BaseEmbed(game)
         .setTitle(`Game ${game.match_num}`)
         .addField('Player', formatted[0]);

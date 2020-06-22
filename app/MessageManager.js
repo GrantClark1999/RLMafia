@@ -49,7 +49,7 @@ class MessageManager {
             'CHANGE_HOST': 1                    // 1 -> Host Player
         };
         const filter = Filters[type](game);
-        const collector = game.last_message.createReactionCollector(filter, {time: timeout[type], max: max[type]});
+        const collector = game.last_message.createReactionCollector(filter, {time: timeout[type], max: max[type], dispose: true});
         Collectors[type](collector, game);
     }
 
@@ -75,12 +75,13 @@ class MessageManager {
      */
     static async addReactions(game, type) {
         let emojis = {
-            'REGISTRATION': ['✅', '❌', '▶'],
-            'GAMEBOARD': ['▶', '🔀'],
+            'REGISTRATION': ['✅', '❌', '🟢', '▶'],
+            'GAMEBOARD': ['◀',  '🔀', '▶'],
             'MATCH_END': ['🔵', '🟠'],
             'VOTE': num_emojis.slice(0, game.players.length),
             'MAFIA': ['🔁', '⏹'],
-            'CHANGE_HOST': num_emojis.slice(0, game.players.length)
+            'CHANGE_HOST': num_emojis.slice(0, game.players.length),
+            'LEADERBOARD': []
         };
 
         // Add each appropriate emoji to the last game message (IN ORDER)
@@ -94,46 +95,6 @@ class MessageManager {
         });
 
         return emojis;
-    }
-
-    static sortPlayers(game) {
-        let playersCopy = [...game.players];
-        // playersCopy.sort((a, b) => (a.score > b.score) ? 1 : (a.score === b.score) ?
-        //     a.tag.localeCompare(b.tag) : -1 );
-        playersCopy.sort((a, b) => (a.score === b.score) ? a.tag.localeCompare(b.tag) : (b.score - a.score));
-        return playersCopy
-    }
-
-    static formatPlayers(game, type) {
-        let sorted_players = this.sortPlayers(game);
-        let formatted_players = '';
-        let formatted_score = '';
-        switch (type) {
-            case 'LEADERBOARD':
-                let last_val = -1;
-                let last_pos = 0;
-                for (let i = 0; i < sorted_players.length; i++) {
-                    let player = sorted_players[i];
-                    if (player.score !== last_val) {
-                        last_pos = i;
-                        last_val = player.score;
-                    }
-                    formatted_players += `${num_emojis[last_pos]} ${player.username}\n`;
-                    formatted_score += `${player.score}\n`;
-                }
-                break;
-            default:
-                for (let i = 0; i < sorted_players.length; i++) {
-                    let player = sorted_players[i];
-                    formatted_players += `${num_emojis[i]} ${player.username}\n`;
-                    formatted_score += `${player.score}\n`;
-                }
-                break;
-        }
-        if (formatted_players === '') formatted_players = 'No Players';
-        if (formatted_score === '') formatted_score = 'No Score';
-
-        return [formatted_players, formatted_score];
     }
 
     static sendDMs(game) {

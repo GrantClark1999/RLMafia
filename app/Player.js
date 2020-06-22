@@ -7,6 +7,8 @@ class Player {
         this.tag = user.tag;
         this.avatar = user.avatarURL();
 
+        this.status = 0;
+
         this.game = game;
         this.team = 0;
         this.score = 0;

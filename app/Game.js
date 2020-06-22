@@ -22,7 +22,6 @@ class Game {
             vote_time: 30
         }
 
-        this.status = 'Registration';
         this.match_num = 0;
         this.match_winner;
 
@@ -129,9 +128,8 @@ class Game {
                             .then(() => MessageManager.collect(this, 'CHANGE_HOST'));
                     } else {
                         // Don't remove player from this.players, else single player will not be showed on leaderboard.
-                        console.debug('before end')
                         this.end();
-                        console.debug('after end')
+                        return;
                     }
                 } else {
                     this.players.splice(index, 1);
@@ -171,6 +169,7 @@ class Game {
             this.mafia.push(mafia_player);
             this.villagers.splice(index, 1);
         }
+        MessageManager.sendDMs(this);
     }
 
     assignTeams() {

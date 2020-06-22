@@ -3,5 +3,5 @@ module.exports = (game) => { return (reaction, user) => {
         return false;
     if (game.host.tag === user.tag && reaction.emoji.name === '▶')
         return true;
-    return ['✅', '❌'].includes(reaction.emoji.name);
+    return ['✅', '❌', '🟢'].includes(reaction.emoji.name);
 }};

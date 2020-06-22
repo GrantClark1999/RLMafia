@@ -10,7 +10,7 @@ module.exports = (collector, game) => {
     });
     collector.on('end', (collected, reason) => {
         let has_collected = (collected.size !== 0);
-        if (reason !== 'messageDelete') {
+        if (!has_collected && reason !== 'messageDelete') {
             console.debug(`Ending game after ${collected.size} collections from MATCH_END due to ${reason}`);
             game.end();
         }

@@ -5,7 +5,7 @@
 
 - [X] DM Villager and Mafia Messages
   - [X] Handle DMs NOT Open
-- [ ] Edit Registration Embed with Registered Players
+- [X] Edit Registration Embed with Registered Players
 - [ ] Test `m!kick <player>` feature
 - [ ] Add reaction hinting to Embeds
 - [X] Handle end game -> remove game from players
@@ -17,7 +17,7 @@
 
 ## MEDIUM PRIORITY
 
-- [ ] Re-factor MessageManager embeds into separate json file(s)
+- [X] Re-factor MessageManager embeds into separate file(s)
 - [ ] Edit Embed UI to be more "eye-pleasing"
 - [ ] Private Games
   - [ ] Create temporary channel
@@ -30,8 +30,10 @@
 - [ ] Make "shuffle" for game-start represent shuffling teams ONLY
 - [ ] Make "rewind" for game-start represent going back to registration ONLY
 - [ ] Refactor Emojis into separate file and change all uses to references
+  - [ ] Replace business-level emojis with escaped unicode
 - [ ] Refactor Collector times and max parameters to a guild or user profile
 - [ ] Add `'use-strict';` to all files
+- [ ] Use 🥇, 🥈, and 🥉 for end leaderboard
 
 
 ## LOW PRIORITY
@@ -45,6 +47,8 @@
 - [ ] Allow host to host a game without participating (as spectator)
   - [ ] Allow a spectator host to host multiple games
 - [ ] Give some indication for what points were awarded in the match
+- [ ] Update "game will end" messages on embeds to update by the minute
+- [ ] Add ability to re-assign mafia
 
 
 ## ALREADY COMPLETED (Prior to Version Control on GitHub)

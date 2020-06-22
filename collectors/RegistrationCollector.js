@@ -1,12 +1,27 @@
+const RegistrationEmbed = require('../embeds/server/RegistrationEmbed')
+
 module.exports = (collector, game) => {
     collector.on('collect', async (reaction, user) => {
-        if (reaction.emoji.name === '▶') {
-            game.start();
-            return true;
-        } else if (reaction.emoji.name === '✅') {
-            game.join(user);
-        } else if (reaction.emoji.name === '❌') {
-            game.leave(user);
+        switch (reaction.emoji.name) {
+            case '✅':
+                game.join(user);
+                break;
+            case '❌':
+                game.leave(user);
+                break;
+            case '🟢':
+                game.find(user).status = 1;
+                game.last_message.edit(RegistrationEmbed(game));
+                break;
+            case '▶':
+                game.start()
+                return true;
+        }
+    });
+    collector.on('remove', (reaction, user) => {
+        if (reaction.emoji.name === '🟢') {
+            game.find(user).status = 0;
+            game.last_message.edit(RegistrationEmbed(game));
         }
     });
     collector.on('end', (collected, reason) => {

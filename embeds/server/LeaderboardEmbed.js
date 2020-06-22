@@ -1,8 +1,8 @@
 const BaseEmbed = require('../BaseEmbed');
-const MessageManager = require('../app/MessageManager');
+const Format = require('../Format');
 
 module.exports = (game) => {
-    formatted = MessageManager.formatPlayers(game, 'LEADERBOARD');
+    formatted = Format.formatPlayers(game, 'LEADERBOARD');
     return BaseEmbed(game)
         .setTitle(`Games Played\n${game.match_num}`)
         .addFields(
