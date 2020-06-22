@@ -24,13 +24,16 @@ class Format {
             case 'LEADERBOARD':
                 let last_val = -1;
                 let last_pos = 0;
+                let award_emojis = ['🥇', '🥈', '🥉'];
                 for (let i = 0; i < sorted_players.length; i++) {
                     let player = sorted_players[i];
                     if (player.score !== last_val) {
                         last_pos = i;
                         last_val = player.score;
                     }
-                    formatted_players += `${num_emojis[last_pos]} ${player.username}\n`;
+                    if (last_pos < award_emojis.length)
+                        formatted_players += `${award_emojis[last_pos]} `;
+                    formatted_players += `${player.username}\n`;
                     formatted_other += `${player.score}\n`;
                 }
                 break;

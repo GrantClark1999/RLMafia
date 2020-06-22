@@ -8,5 +8,9 @@ module.exports = (game) => {
     return BaseEmbed(game)
         .setTitle(`Game ${game.match_num}`)
         .setDescription('Announcing the mafia players for last game!\nDid you guess correctly?')
-        .addField('Mafia', `${confirmed_mafia}`);
+        .addFields(
+            { name: 'Mafia', value: `${confirmed_mafia}` },
+            { name: 'Reactions', value: '🔁\n⏹', inline: true},
+            { name: 'Actions', value: 'New RL Match\nEnd Game & Show Final Results', inline: true}
+        );
 };

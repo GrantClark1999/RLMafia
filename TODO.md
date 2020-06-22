@@ -7,18 +7,18 @@
   - [X] Handle DMs NOT Open
 - [X] Edit Registration Embed with Registered Players
 - [ ] Test `m!kick <player>` feature
-- [ ] Add reaction hinting to Embeds
+- [X] Add reaction hinting to Embeds
 - [X] Handle end game -> remove game from players
 - [ ] Add `m!help` command + embed
 - [ ] Re-factor objects into MongoDB
 - [X] MafiaCollector `.on('end')` needs to be added
-- [ ] Test Leaderboard Formatting
+- [ ] Test Leaderboard Sorting
 
 
 ## MEDIUM PRIORITY
 
 - [X] Re-factor MessageManager embeds into separate file(s)
-- [ ] Edit Embed UI to be more "eye-pleasing"
+- [X] Edit Embed UI to be more "eye-pleasing"
 - [ ] Private Games
   - [ ] Create temporary channel
   - [ ] Ask Host for Users to allow / invite
@@ -27,13 +27,14 @@
 - [ ] Handle Errors thrown by outputting something to console and discord game
 - [ ] Add `m!leave` as override to leave all games associated with such player
 - [ ] Add `m!end` for hosts to end the game manually at any point
-- [ ] Make "shuffle" for game-start represent shuffling teams ONLY
-- [ ] Make "rewind" for game-start represent going back to registration ONLY
+- [X] Make "shuffle" for game-start represent shuffling teams ONLY
+- [X] Make "rewind" for game-start represent going back to registration ONLY
 - [ ] Refactor Emojis into separate file and change all uses to references
   - [ ] Replace business-level emojis with escaped unicode
 - [ ] Refactor Collector times and max parameters to a guild or user profile
 - [ ] Add `'use-strict';` to all files
-- [ ] Use 🥇, 🥈, and 🥉 for end leaderboard
+- [X] Use 🥇, 🥈, and 🥉 for end leaderboard
+- [ ] Find better way to display number of games played in Leaderboard
 
 
 ## LOW PRIORITY
@@ -47,7 +48,7 @@
 - [ ] Allow host to host a game without participating (as spectator)
   - [ ] Allow a spectator host to host multiple games
 - [ ] Give some indication for what points were awarded in the match
-- [ ] Update "game will end" messages on embeds to update by the minute
+- [ ] Update "game will end" messages on embeds to update by the minute as 'time remaining' fields
 - [ ] Add ability to re-assign mafia
 
 
