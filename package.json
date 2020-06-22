@@ -1,6 +1,6 @@
 {
   "name": "rlmafia",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "discord bot for rocket league mafia",
   "main": "bot.js",
   "dependencies": {
