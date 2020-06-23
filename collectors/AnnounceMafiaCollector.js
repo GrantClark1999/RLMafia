@@ -1,8 +1,7 @@
 module.exports = (collector, game) => {
     collector.on('collect', (reaction, user) => {
         if (reaction.emoji.name === '🔁') {
-            game.match_num--;
-            game.showGameboard();
+            game.start();
         } else if (reaction.emoji.name === '⏹') {
             game.end();
         } else {

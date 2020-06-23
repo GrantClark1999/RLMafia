@@ -4,8 +4,11 @@ module.exports = (collector, game) => {
             game.match_num--;
             game.register();
         } else if (reaction.emoji.name === '🔀') {
-            game.match_num--;
-            game.start();
+            game.refreshTeams();
+            reaction.users.remove(user.id);
+        } else if (reaction.emoji.name === '🔄') {
+            game.assignMafia();
+            reaction.users.remove(user.id);
         } else if (reaction.emoji.name === '▶') {
             game.matchEnd();
         } else

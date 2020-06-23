@@ -14,7 +14,7 @@ class MessageManager {
      * @returns {Promise<Discord.MessageEmbed>}
      */
     static async sendServerMessage(game, type) {
-        const embed = ServerEmbeds[type](game)
+        const embed = ServerEmbeds[type](game);
 
         if (type === 'CHANGE_HOST' || type === 'LEADERBOARD') {
             game.last_message = await game.channel.send(embed);
@@ -36,13 +36,13 @@ class MessageManager {
         const register_max = game.profile.max_players;
         const timeout = {
             'REGISTRATION': 300000,             // 5 Minutes
+            'GAMEBOARD': 600000,                // 10 Minutes
             'MATCH_END': 600000,                // 10 Minutes
             'VOTE': vote_time,                  // Variable (Default = 30 seconds)
             'MAFIA': 300000,                    // 5 Minutes
             'CHANGE_HOST': 300000               // 5 Minutes
         };
         const max = {
-            'REGISTRATION': register_max,       // Variable (Default = 8)
             'MATCH_END': 1,                     // 1 -> Host Player
             'VOTE': game.players.length,        // Number of players registered in the game
             'MAFIA': 1,                         // 1 -> Host Player
@@ -76,7 +76,7 @@ class MessageManager {
     static async addReactions(game, type) {
         let emojis = {
             'REGISTRATION': ['✅', '❌', '🟢', '▶'],
-            'GAMEBOARD': ['◀',  '🔀', '▶'],
+            'GAMEBOARD': ['◀',  '🔀', '🔄', '▶'],
             'MATCH_END': ['🔵', '🟠'],
             'VOTE': num_emojis.slice(0, game.players.length),
             'MAFIA': ['🔁', '⏹'],
@@ -99,10 +99,14 @@ class MessageManager {
 
     static sendDMs(game) {
         game.villagers.forEach(player => {
-            player.dm_channel.send(ClientEmbeds.VillagerEmbed(game));
+            if (player.last_dm) 
+                player.last_dm.delete();
+            player.dm_channel.send(ClientEmbeds.VillagerEmbed(game)).then(dm => player.last_dm = dm);
         });
         game.mafia.forEach(player => {
-            player.dm_channel.send(ClientEmbeds.MafiaEmbed(game));
+            if (player.last_dm)
+                player.last_dm.delete();
+            player.dm_channel.send(ClientEmbeds.MafiaEmbed(game)).then(dm => player.last_dm = dm);
         });
     }
 }

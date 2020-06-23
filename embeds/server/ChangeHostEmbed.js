@@ -4,7 +4,7 @@ const Format = require('../Format');
 module.exports = (game) => {
     formatted = Format.formatPlayers(game, 'CHANGE_HOST');
     return BaseEmbed(game)
-        .setTitle(`Game ${game.match_num}`)
+        .setTitle('Select a player to make the host')
         .addFields(
             { name: 'Player', value: formatted[0]}
         );

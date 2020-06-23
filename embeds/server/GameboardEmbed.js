@@ -1,7 +1,8 @@
 const BaseEmbed = require('../BaseEmbed');
+const Format = require('../Format');
 
 module.exports = (game) => {
-    let teams = game.getTeams();
+    let teams = Format.formatPlayers(game, 'GAMEBOARD');
     let blue_team = teams[0];
     let orange_team = teams[1];
     return BaseEmbed(game)
@@ -13,8 +14,8 @@ module.exports = (game) => {
             { name: 'Blue Team', value: `${blue_team}`, inline: true },
             { name: 'Orange Team', value: `${orange_team}`, inline: true },
             { name: '\u200B', value: '\u200B', inline: true },
-            { name: 'Reactions', value: '◀\n🔀\n▶', inline: true },
-            { name: 'Action', value: 'Back to Registration\nChange Teams\nReady To Vote', inline: true },
+            { name: 'Reactions', value: '◀\n🔀\n🔄\n▶', inline: true },
+            { name: 'Action', value: 'Back to Registration\nChange Teams\nChange Mafia\nReady To Vote', inline: true },
             { name: '\u200B', value: '\u200B', inline: true }
         );
 };

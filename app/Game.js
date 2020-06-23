@@ -6,6 +6,7 @@ const PackageInfo = require('../package.json');
 const Player = require('./Player');
 const Bot = require('../bot');
 const { Error } = require('../errors');
+const GameboardEmbed = require('../embeds/server/GameboardEmbed');
 
 const num_emojis = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣'];
 
@@ -68,6 +69,11 @@ class Game {
         this.assignTeams();
         this.showGameboard();
     }
+
+    refreshTeams() {
+        this.assignTeams();
+        this.last_message.edit(GameboardEmbed(this));
+    }
     
     matchEnd() {
         MessageManager.sendServerMessage(this, 'MATCH_END')
@@ -97,11 +103,13 @@ class Game {
         this.last_message.delete();
     }
 
-    join(user) {
+    async join(user) {
+        // If game is full, don't add player and remove their "join" reaction.
         if (this.players.length >= this.profile.max_players) {
             this.removeReactions(user, this.last_message);
             throw new Error('GAME_IS_FULL');
         }
+        // If user is not already in the game -> make new player.
         if (this.find(user) === null) {
             Player.create(user, this).then(new_player => {
                 this.players.push(new_player);
@@ -116,7 +124,7 @@ class Game {
         }
     }
 
-    leave(user) {
+    async leave(user) {
         let player = this.find(user);
         if (player !== null) {
             let index = this.players.indexOf(player);
@@ -222,23 +230,6 @@ class Game {
             if (mafia_player.votes_against === 0)
                 mafia_player.score += config.points.mafia.noVotesAgainst;
         });
-    }
-
-    getTeams() {
-        let blue_team = '';
-        let orange_team = '';
-
-        this.players.forEach(player => {
-            if (player.team === 0) 
-                blue_team += `${player.username}\n`;
-            else
-                orange_team += `${player.username}\n`;
-        });
-
-        if (blue_team === '') blue_team = 'No Players';
-        if (orange_team === '') orange_team = 'No Players';
-
-        return [blue_team, orange_team];
     }
 
     find(user) {

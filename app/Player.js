@@ -15,11 +15,14 @@ class Player {
         this.has_voted = false;
         this.votes_against = 0;
         this.is_dead = false;
+
+        this.last_dm;
     }
 
     async initialize() {
         try {
             this.dm_channel = await this.user.createDM();
+            this.dm_channel.messages.cache.forEach(message => message.delete());
         } catch (err) {
             console.error(err);
             throw new Error('DM_ERROR', user);

@@ -52,7 +52,7 @@ client.on("message", async message => {
             break;
         case 'kick':
             if (games.has(user)) {
-                game = games.get(user);
+                let game = games.get(user);
                 if (game.host.tag === user) {
                     const kicked_player = args.shift();
                     game.leave(kicked_player);

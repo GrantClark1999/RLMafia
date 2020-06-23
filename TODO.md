@@ -1,22 +1,34 @@
 # TODO
 
+## BUGS
 
-## HIGH PRIORITY
+## TESTING
+- [ ] Removes non-host reactions where necessary and removes votes from non-players
+- [ ] Test registration embed for when people join / leave
+- [ ] Make sure any non-participant canont react to game-level reactions (excluding registration)
+- [ ] Make sure no more than 8 people can join
+- [ ] Test to make sure Change Host collects reactions from host and sets new host
 
-- [ ] Re-factor objects into MongoDB
-- [ ] `m!kick`
-  - [ ] Test `m!kick <player>` feature **OR**
-  - [ ] Make `m!kick` a reaction-based process
+## HIGH PRIORITY (Features / Improvements)
+
+- [ ] See point tallies at any point in the game
+- [ ] Re-factor objects into MongoDB (or SQL Database)
+- [ ] `m!kick` -> reaction-based
 - [ ] Test Leaderboard Sorting
+- [ ] Add `m!info` command -> game information
+- [ ] Add stat information to Leaderboard (num mafia kills, biggest deception, etc.)
+- [ ] Add ability to skip the entire game from anywhere
+  - [ ] Either implement `m!skip` or add ⏭ to every embed + collection
 
 
-## MEDIUM PRIORITY
+## MEDIUM PRIORITY (Features / Improvements)
 
 - [ ] Private Games
   - [ ] Create temporary channel
   - [ ] Ask Host for Users to allow / invite
   - [ ] Users get added to temporary channel
   - [ ] After game end, post results to the main Mafia channel
+- [ ] Allow players to CHOOSE their teams (team captains, host chooses, etc.)
 - [ ] Handle Errors thrown by outputting something to console and discord game
 - [ ] Add `m!leave` as override to leave all games associated with such player
 - [ ] Add `m!end` for hosts to end the game manually at any point
@@ -25,9 +37,10 @@
 - [ ] Refactor Collector times and max parameters to a guild or user profile
 - [ ] Add `'use-strict';` to all files
 - [ ] Find better way to display number of games played in Leaderboard
+- [ ] Possible --- Add reactions to DMs to acknowledge your roles as a 'ready-up'.
 
 
-## LOW PRIORITY
+## LOW PRIORITY (Features / Improvements)
 
 - [ ] Add in more robust console debug logging and error logging
 - [ ] `m!prefix <new_prefix>` Change RL Mafia prefix
@@ -40,6 +53,11 @@
 - [ ] Give some indication for what points were awarded in the match
 - [ ] Update "game will end" messages on embeds to update by the minute as 'time remaining' fields
 - [ ] Add ability to re-assign mafia
+
+
+## Mafia Role Ideas
+- [ ] `Jester` role -> try to win the game, but try to get lynched in the voting process.
+- [ ] `Demolitionist` role -> gets +1 point for every n demos
 
 
 ## COMPLETED
@@ -55,6 +73,21 @@
 - [X] Make "rewind" for game-start represent going back to registration ONLY
 - [X] Use 🥇, 🥈, and 🥉 for end leaderboard
 - [X] Add `m!help` command + embed
+- [X] Ensure players are listed on Registration Embed on Join/Leave
+- [X] Fix Game # Increment
+- [X] Make sure RLMafia only ever has one embed on DMs at a time for a game
+- [X] Make sure Registered player status' are separated by `\n`
+- [X] Fix DM when starting new game
+- [X] Switch teams on new match
+- [X] Not removing non-host reactions (at least from announce-mafia)
+- [X] Separate Change Teams and Change Mafia
+- [X] Made 'No Players' show as blank if no players are assigned to a team
+- [X] Test new find() method -> does not work (replaced back with old)
+- [X] Make Change Teams only edit embed, not re-send
+- [+] Registration embed only updating joined users on status change or leave
+- [X] Gives game is not defined error at bot.js : 55 : 22
+  - [+] More players on Orange than on Blue
+- [X] Fix Change Host not collecting reactions from host.
 
 
 ## COMPLETED (prior to version-control via Github)

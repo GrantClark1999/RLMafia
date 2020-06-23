@@ -4,10 +4,18 @@ module.exports = (collector, game) => {
     collector.on('collect', async (reaction, user) => {
         switch (reaction.emoji.name) {
             case '✅':
-                game.join(user);
+                game.join(user).then(joined => {
+                    if (joined) {
+                        game.last_message.edit(RegistrationEmbed(game));
+                    } else {
+                        reaction.users.remove(user.id);
+                    }
+                });
                 break;
             case '❌':
-                game.leave(user);
+                game.leave(user).then(() => {
+                    game.last_message.edit(RegistrationEmbed(game));
+                });
                 break;
             case '🟢':
                 game.find(user).status = 1;
@@ -19,7 +27,7 @@ module.exports = (collector, game) => {
         }
     });
     collector.on('remove', (reaction, user) => {
-        if (reaction.emoji.name === '🟢') {
+        if (reaction.emoji.name === '🟢' && game.find(user)) {
             game.find(user).status = 0;
             game.last_message.edit(RegistrationEmbed(game));
         }
