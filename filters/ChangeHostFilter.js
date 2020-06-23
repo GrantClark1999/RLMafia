@@ -5,5 +5,10 @@ module.exports = (game) => { return (reaction, user) => {
         reaction.users.remove(user.id);
         return false;
     }
-    return num_emojis.includes(reaction.emoji.name);
+    if (num_emojis.includes(reaction.emoji.name)) {
+        return true;
+    } else {
+        reaction.remove();
+        return false;
+    }
 }};

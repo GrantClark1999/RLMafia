@@ -22,7 +22,11 @@ class Player {
     async initialize() {
         try {
             this.dm_channel = await this.user.createDM();
-            this.dm_channel.messages.cache.forEach(message => message.delete());
+            let messages = await this.dm_channel.messages.fetch({ limit: 100 });
+            messages.forEach(message => {
+                if (message.author.bot)
+                    message.delete();
+            });
         } catch (err) {
             console.error(err);
             throw new Error('DM_ERROR', user);

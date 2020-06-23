@@ -2,12 +2,15 @@
 
 ## BUGS
 
+
 ## TESTING
-- [ ] Removes non-host reactions where necessary and removes votes from non-players
-- [ ] Test registration embed for when people join / leave
-- [ ] Make sure any non-participant canont react to game-level reactions (excluding registration)
-- [ ] Make sure no more than 8 people can join
-- [ ] Test to make sure Change Host collects reactions from host and sets new host
+
+- [ ] Removes non-host reactions where necessary and removes votes from non-players `Need 3 Total`
+- [ ] Test registration embed for when people join / leave `Need 2 Total`
+- [ ] Make sure any non-participant canont react to game-level reactions (excluding registration) `Need 3 Total`
+- [ ] Make sure no more than 8 people can join `Need 8 Total`
+- [ ] Test to make sure Change Host collects reactions from host and sets new host `Need 2 Total`
+
 
 ## HIGH PRIORITY (Features / Improvements)
 
@@ -19,6 +22,7 @@
 - [ ] Add stat information to Leaderboard (num mafia kills, biggest deception, etc.)
 - [ ] Add ability to skip the entire game from anywhere
   - [ ] Either implement `m!skip` or add ⏭ to every embed + collection
+- [ ] Refactor Emojis
 
 
 ## MEDIUM PRIORITY (Features / Improvements)
@@ -36,7 +40,6 @@
   - [ ] Replace business-level emojis with escaped unicode
 - [ ] Refactor Collector times and max parameters to a guild or user profile
 - [ ] Add `'use-strict';` to all files
-- [ ] Find better way to display number of games played in Leaderboard
 - [ ] Possible --- Add reactions to DMs to acknowledge your roles as a 'ready-up'.
 
 
@@ -56,6 +59,7 @@
 
 
 ## Mafia Role Ideas
+
 - [ ] `Jester` role -> try to win the game, but try to get lynched in the voting process.
 - [ ] `Demolitionist` role -> gets +1 point for every n demos
 
@@ -88,6 +92,9 @@
 - [X] Gives game is not defined error at bot.js : 55 : 22
   - [+] More players on Orange than on Blue
 - [X] Fix Change Host not collecting reactions from host.
+- [X] Find better way to display number of games played in Leaderboard
+- [X] Make sure there is only ever ONE message in DMs with RLMafia Bot (i.e. fetch and delete all other messages)
+- [X] Ensured that only the defined reactions can be used on RLMafia Game
 
 
 ## COMPLETED (prior to version-control via Github)

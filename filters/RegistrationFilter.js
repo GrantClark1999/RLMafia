@@ -9,5 +9,10 @@ module.exports = (game) => { return (reaction, user) => {
             return false;
         }
     }
-    return ['✅', '❌', '🟢'].includes(reaction.emoji.name);
+    if (['✅', '❌', '🟢'].includes(reaction.emoji.name)) {
+        return true;
+    } else {
+        reaction.remove();
+        return false;
+    }
 }};

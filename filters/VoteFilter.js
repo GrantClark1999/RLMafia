@@ -7,7 +7,11 @@ module.exports = (game) => { return (reaction, user) => {
         reaction.users.remove(user.id);
     } else {
         found_player.has_voted = true;
-        valid_reaction = num_emojis.includes(reaction.emoji.name);
+        if (num_emojis.includes(reaction.emoji.name)) {
+            valid_reaction = true;
+        } else {
+            reaction.remove();
+        }
     }
     return valid_reaction;
 }};
