@@ -97,6 +97,7 @@
 - [X] Make sure there is only ever ONE message in DMs with RLMafia Bot (i.e. fetch and delete all other messages)
 - [X] Ensured that only the defined reactions can be used on RLMafia Game
 - [X] Show NUM in from of Change Host Name
+- [X] Fixed undefined behavior when going back to registration from gameboard before all reactions were sent.
 
 
 ## COMPLETED (prior to version-control via Github)
