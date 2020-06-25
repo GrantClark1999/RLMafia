@@ -53,9 +53,10 @@ class Format {
                 break;
             case 'CHANGE_HOST':
                 sorted_players = this.sortPlayersByName(game);
-                sorted_players.forEach(ch_player => {
-                    column1 += `${ch_player.user}\n`;                       // col1 = players (by name)
-                });
+                for (let i = 0; i < sorted_players.length; i++) {
+                    let ch_player = sorted_players[i];
+                    column1 += `${num_emojis[i]} ${ch_player.user}\n`;                       // col1 = players (by name)
+                }
                 break;
             default:
                 sorted_players = this.sortPlayersByScore(game);

@@ -87,18 +87,18 @@ class MessageManager {
         // Add each appropriate emoji to the last game message (IN ORDER)
         let message = game.last_message;
 
-        emojis[type].forEach(async (emoji) => {
+        for (let i = 0; i < emojis[type].length; i++) {
             try {
-                await message.react(emoji);
+                await message.react(emojis[type][i]);
             } catch (err) {
                 if (message.deleted)
                     return emojis;
                 console.error(`Failed to add ${emoji} reaction to ${type} message.`);
                 console.error(err);
             }
-        });
+        }
 
-        return emojis;
+        return Promise.resolve(emojis);
     }
 
     static sendDMs(game) {

@@ -1,8 +1,6 @@
 # TODO
 
 ## BUGS
-- [ ] Show NUM in from of Change Host Name
-- [ ] Still doesn't actually Change Host
 
 ## TESTING
 
@@ -98,6 +96,7 @@
 - [X] Find better way to display number of games played in Leaderboard
 - [X] Make sure there is only ever ONE message in DMs with RLMafia Bot (i.e. fetch and delete all other messages)
 - [X] Ensured that only the defined reactions can be used on RLMafia Game
+- [X] Show NUM in from of Change Host Name
 
 
 ## COMPLETED (prior to version-control via Github)
