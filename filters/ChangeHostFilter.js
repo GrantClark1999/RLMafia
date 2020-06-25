@@ -1,6 +1,7 @@
 module.exports = (game) => { return (reaction, user) => {
-    if (game.last_message.author.id === user.id)
+    if (user.bot)
         return false;
+    
     if (game.host.tag !== user.tag) {
         reaction.users.remove(user.id);
         return false;

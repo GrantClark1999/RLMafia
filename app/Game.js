@@ -110,18 +110,21 @@ class Game {
             throw new Error('GAME_IS_FULL');
         }
         // If user is not already in the game -> make new player.
-        if (this.find(user) === null) {
-            Player.create(user, this).then(new_player => {
+        let added;
+        if (!this.find(user)) {
+            try {
+                let new_player = await Player.create(user, this);
                 this.players.push(new_player);
-                return true;
-            }).catch(err => {
+                added = true;
+            } catch (err) {
                 console.error(err.message);
                 if (err instanceof Error)
                     this.channel.send(err.message);
                 this.removeReactions(user, this.last_message);
-                return false;
-            });
+                added = false;
+            }
         }
+        return added;
     }
 
     async leave(user) {
@@ -133,7 +136,8 @@ class Game {
                     if (this.players.length > 1) {
                         this.players.splice(index, 1);
                         MessageManager.sendServerMessage(this, 'CHANGE_HOST')
-                            .then(() => MessageManager.collect(this, 'CHANGE_HOST'));
+                            .then(() => MessageManager.collect(this, 'CHANGE_HOST'))
+                            .catch(console.error);
                     } else {
                         // Don't remove player from this.players, else single player will not be showed on leaderboard.
                         this.end();

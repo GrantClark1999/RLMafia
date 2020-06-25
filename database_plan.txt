@@ -1,0 +1,37 @@
+GUILD:
+    prefix
+    role
+
+USER:
+    preset:
+        max_players (2-8)
+        num_mafia (0-8, OR random)
+        vote_time (in seconds)
+        points:
+            villager:
+                team_won
+                team_lost
+                guessed_mafia
+                killed_mafia
+            mafia:
+                team_won
+                team_lost
+                no_votes_against
+                not_killed
+    game
+
+GAMES:
+    GAME:
+        USERS:
+            USER:
+                -> user in db
+            USER:
+                -> ...
+            USER:
+                -> ...
+            ...
+    GAME:
+        ...
+    GAME:
+        ...
+    ...

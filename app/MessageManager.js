@@ -16,7 +16,7 @@ class MessageManager {
     static async sendServerMessage(game, type) {
         const embed = ServerEmbeds[type](game);
 
-        if (type === 'CHANGE_HOST' || type === 'LEADERBOARD') {
+        if (type === 'LEADERBOARD') {
             game.last_message = await game.channel.send(embed);
         } else {
             await this.post(game, embed);
@@ -85,10 +85,14 @@ class MessageManager {
         };
 
         // Add each appropriate emoji to the last game message (IN ORDER)
+        let message = game.last_message;
+
         emojis[type].forEach(async (emoji) => {
             try {
-                await game.last_message.react(emoji);
+                await message.react(emoji);
             } catch (err) {
+                if (message.deleted)
+                    return emojis;
                 console.error(`Failed to add ${emoji} reaction to ${type} message.`);
                 console.error(err);
             }

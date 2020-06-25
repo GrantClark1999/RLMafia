@@ -1,15 +1,17 @@
 # TODO
 
 ## BUGS
-
+- [ ] Show NUM in from of Change Host Name
+- [ ] Still doesn't actually Change Host
 
 ## TESTING
 
 - [ ] Removes non-host reactions where necessary and removes votes from non-players `Need 3 Total`
-- [ ] Test registration embed for when people join / leave `Need 2 Total`
+- [X] Test registration embed for when people join / leave `Need 2 Total`
 - [ ] Make sure any non-participant canont react to game-level reactions (excluding registration) `Need 3 Total`
 - [ ] Make sure no more than 8 people can join `Need 8 Total`
 - [ ] Test to make sure Change Host collects reactions from host and sets new host `Need 2 Total`
+- [ ] Test that points are allocated accordingly
 
 
 ## HIGH PRIORITY (Features / Improvements)
@@ -23,6 +25,7 @@
 - [ ] Add ability to skip the entire game from anywhere
   - [ ] Either implement `m!skip` or add ⏭ to every embed + collection
 - [ ] Refactor Emojis
+- [ ] Replace === comparisons with user.bot in filters
 
 
 ## MEDIUM PRIORITY (Features / Improvements)
@@ -40,7 +43,7 @@
   - [ ] Replace business-level emojis with escaped unicode
 - [ ] Refactor Collector times and max parameters to a guild or user profile
 - [ ] Add `'use-strict';` to all files
-- [ ] Possible --- Add reactions to DMs to acknowledge your roles as a 'ready-up'.
+- [ ] Possible --- Add reactions to DMs to acknowledge your roles as a 'ready-up'
 
 
 ## LOW PRIORITY (Features / Improvements)

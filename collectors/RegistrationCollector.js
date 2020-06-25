@@ -22,7 +22,7 @@ module.exports = (collector, game) => {
                 game.last_message.edit(RegistrationEmbed(game));
                 break;
             case '▶':
-                game.start()
+                game.start();
                 return true;
         }
     });

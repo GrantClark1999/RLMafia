@@ -2,6 +2,7 @@ module.exports = (collector, game) => {
     collector.on('collect', (reaction, user) => {
         let index = num_emojis.indexOf(reaction.emoji.name);
         game.host = game.players[index];
+        game.register();
     });
     collector.on('end', (collected, reason) => {
         let has_collected = (collected.size !== 0);
