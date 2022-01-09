@@ -5,6 +5,8 @@ const config = require('./config.json');
 const Game = require('./app/Game');
 const { Error } = require('./errors');
 const { ServerEmbeds } = require('./embeds');
+// const GuildModel = require('./models/Guild');
+// const { connect } = require('mongoose');
 
 global.games = new Map();
 global.num_emojis = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣'];
@@ -16,11 +18,22 @@ function updateActivity() {
 client.on("ready", () => {
     console.log(`Bot has started, with ${client.users.cache.size} users, in ${client.channels.cache.size} channels of ${client.guilds.cache.size} guilds.`);
     updateActivity();
+    // let guildIds = client.guilds.cache.map(guild => guild.id);
+    // guildIds.forEach((element, index) => {
+    //     GuildModel.findOne({ id: guild.id }, (err, exists) => {
+    //         if (!exists) {
+    //             const newGuild = new GuildModel({ id: guild.id });
+    //             newGuild.save();
+    //         }
+    //     })
+    // })
 });
 
-client.on("guildCreate", guild => {
+client.on("guildCreate", async guild => {
     console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
     updateActivity();
+    // const doc = new GuildModel({ id: guild.id });
+    // await doc.save();
 });
 
 client.on("guildDelete", guild => {
@@ -63,7 +76,19 @@ client.on("message", async message => {
                 throw new Error('GAME_DOES_NOT_EXIST', user);
             }
             break;
+        // case 'prefix':
+        //     const req = await GuildModel.findOne({ id: message.guild.id });
+        //     if (!req)
+        //         return message.reply(`I was unable to find ${message.guild.name} in our database.`);
+        //     return message.reply(`Prefix: ${req.prefix}`);
     }
 });
-
+// (async () => {
+//     await connect('mongodb://localhost/rlmafia', {
+//         useNewUrlParser: true,
+//         useFindAndModify: false,
+//         useUnifiedTopology: true
+//     });
+//     return client.login(config.token);
+// })()
 client.login(config.token);
